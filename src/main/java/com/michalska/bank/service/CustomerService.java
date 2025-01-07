@@ -2,6 +2,7 @@ package com.michalska.bank.service;
 
 import com.michalska.bank.entities.Customer;
 import com.michalska.bank.model.exception.CustomerNotFoundException;
+import com.michalska.bank.model.exception.ResourceNotFoundException;
 import com.michalska.bank.repository.CustomerRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class CustomerService {
     }
 
     public Customer getCustomerById(Long id) {
-        return customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
+        return customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer not found with id: " + id));
     }
 
     public List<Customer> findAllCustomers() {

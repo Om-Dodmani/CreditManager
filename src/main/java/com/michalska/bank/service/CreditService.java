@@ -6,6 +6,7 @@ import com.michalska.bank.entities.Product;
 import com.michalska.bank.model.exception.CreditNotFoundException;
 import com.michalska.bank.model.exception.CustomerNotFoundException;
 import com.michalska.bank.model.exception.ProductNotFoundException;
+import com.michalska.bank.model.exception.ResourceNotFoundException;
 import com.michalska.bank.repository.CreditRepository;
 import com.michalska.bank.repository.CustomerRepository;
 import com.michalska.bank.repository.ProductRepository;
@@ -50,7 +51,7 @@ public class CreditService {
     }
 
     public Credit getCreditById(Long id) {
-        return creditRepository.findById(id).orElseThrow(() -> new CreditNotFoundException(id));
+        return creditRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Credit not found with id: " + id));
     }
 
     public List<Credit> getCredits() {
@@ -66,7 +67,7 @@ public class CreditService {
     }
 
     public Customer getCustomerById(Long id) {
-        return customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
+        return customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer not found with id: " + id));
     }
 
     public List<Customer> findAllCustomers() {
@@ -83,7 +84,7 @@ public class CreditService {
     }
 
     public Product getProductById(Long id) {
-        return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+        return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
     }
 
     public List<Product> findAllProducts() {
